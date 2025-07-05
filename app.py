@@ -1,13 +1,12 @@
 import streamlit as st
 import pickle
-import docx  # Extract text from Word file
-import PyPDF2  # Extract text from PDF
+import docx 
+import PyPDF2  
 import re
 
-# Load pre-trained model and TF-IDF vectorizer (ensure these are saved earlier)
-svc_model = pickle.load(open('clf.pkl', 'rb'))  # Example file name, adjust as needed
-tfidf = pickle.load(open('tfidf.pkl', 'rb'))  # Example file name, adjust as needed
-le = pickle.load(open('encoder.pkl', 'rb'))  # Example file name, adjust as needed
+svc_model = pickle.load(open('clf.pkl', 'rb'))  
+tfidf = pickle.load(open('tfidf.pkl', 'rb')) 
+le = pickle.load(open('encoder.pkl', 'rb'))  
 
 
 # Function to clean resume text
@@ -42,11 +41,9 @@ def extract_text_from_docx(file):
 
 # Function to extract text from TXT with explicit encoding handling
 def extract_text_from_txt(file):
-    # Try using utf-8 encoding for reading the text file
     try:
         text = file.read().decode('utf-8')
     except UnicodeDecodeError:
-        # In case utf-8 fails, try 'latin-1' encoding as a fallback
         text = file.read().decode('latin-1')
     return text
 
